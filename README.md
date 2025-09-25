@@ -101,8 +101,8 @@ const getMeetingAndToken = async (id) => {
   <br>
 
 
-<h3>- above code block will check fot the meeting id , here getMeetingAndToken  is acts as ASYNC function  which will look for the meeting id , by taking id as input 
-	it it exists we use that id for the joining meeting </h3>
+- above code block will check fot the meeting id , here getMeetingAndToken  is acts as ASYNC function  which will look for the meeting id , by taking id as input 
+	it it exists we use that id for the joining meeting 
 	
 	it not it will create the new meeting id by authenticating JWT token 
    
@@ -117,7 +117,7 @@ const onMeetingLeave = () => {
   };
   <br>
 
-<h3>- here when user leave the ongoing meeting , after leave it will set meeting id as null (nothing)</h3>
+<h4>- here when user leave the ongoing meeting , after leave it will set meeting id as null (nothing)</h4>
 
 
 <h3>4. Join VideoCall </h3>
@@ -168,19 +168,19 @@ const onMeetingLeave = () => {
     <br>
   );
 
-<h2>- this above code will check meeting id ,</h2>
+<h4>- this above code will check meeting id ,</h4>
 
 
-   <h2>
+   <h4>
    -if it's exits and valid it will allow user to join meet 
 	-if not it will let user to join screen  section for making 
  
 -  MeetingProvider component provide meeting context with the config of mic ,cam 
 - here token act as entry pass 
- </h2>
+ </h4>
  
 
-<h2>5. Join Screen Component 	</h2>
+<h3>5. Join Screen Component 	</h3>
 
 function JoinScreen({ getMeetingAndToken }) {
 <br>
@@ -212,7 +212,7 @@ function JoinScreen({ getMeetingAndToken }) {
   <br>
     <div>
     <br>
-      <h2>VideoSDK Meeting</h2>
+      <p>VideoSDK Meeting</p>
       <br>
       <div>
       <br>
@@ -231,38 +231,45 @@ function JoinScreen({ getMeetingAndToken }) {
         <button onClick={handleJoin}>Join Meeting</button>
         <br>
       </div>
-      <br>
       <div>
-      <br>
         <button onClick={handleCreate}>Create New Meeting</button>
         <br>
       </div>
-      <br>
     </div>
-    <br>
   );
   <br>
 }
 <br>
 
 
-<h3>
+<h4>
 - first screen user when they join the meeting 
+	<br>
 -join screen takes meetingid as input via props 
+	<br>
 -  const [meetingId, setMeetingId] = useState(""); ,here use state use for the creating the state of the meeting id 
+	<br>
 	- Meetinid= user give as input 
+	<br>
 	- SetMeetingId= function to update 
-</h3>
+	<br>
+</h4>
 
 
-<h3>
+<h4>
 handlejoin() -- it works when user click join meeting 
+	<br>
 	- by checking the meeting id 
+	<br>
 		- if  meeting id is not empty - it will call setMeeting and Token  
+	<br>
 		- if It's Empty it will show message for enter meeting id 
+		<br>
 
 handleCreate() - it works when user clicks crate meeting 
+<br>
 	- here we pass null value inside getMeetingAndToken()  to make sure we don't have any meeting id 
+	<br>
 </h3>
 
 <h3>
@@ -271,14 +278,14 @@ return (
 	....
 	....
 ) 
+	<br>
 - the whole code inside return statement refers to the UI part in screen 
 </h3>
 
+<br>
 
-
-<h2>6.  Participantview()  Component 
-
-
+<h3>6.  Participantview()  Component </h3>
+<br>
 function ParticipantView({ participantId }) {
 <br>
   const videoRef = useRef(null);
@@ -345,7 +352,7 @@ function ParticipantView({ participantId }) {
   <br>
     <div style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
     <br>
-      <h4>{displayName || participantId} {isLocal && "(You)"}</h4>
+      <p>{displayName || participantId} {isLocal && "(You)"}</p>
       <br>
       <p>Camera: {webcamOn ? "ON" : "OFF"} | Mic: {micOn ? "ON" : "OFF"}</p>
       <br>
@@ -418,157 +425,241 @@ function ParticipantView({ participantId }) {
 
 <h4>
 {participantID} -> it refers to the unique id of the participant  which acts as props 
+<br>
 
 - useRef -> it will create the reference
+- <br>
 	-videoRef -> it refers to the video element 
+	<br>
 	-MicRef -> it refers to the audio element 
+	<br>
 
 
-- NOW , useParticipant(participantID) -> it is Videosdk hook with the use of this we can trak the real time state of the user 
+- NOW , useParticipant(participantID) -> it is Videosdk hook with the use of this we can trak the real time state of the user
+- <br>
 	- we can track Audio & Video
+	<br>
 	- is Mic and Camera is on/off?
+	<br>
 	- isLocal  it will return true if it's you 
+	<br>
 	- DisplayName  - the name that you enter while joining the meeting 
+	<br>
 
 -  // Handle video stream
+-  <br>
   useEffect(() => {
+  <br>
     if (videoRef.current && webcamStream) {
+	<br>
       const mediaStream = new MediaStream();
+	  <br>
       mediaStream.addTrack(webcamStream.track);
+	  <br>
       videoRef.current.srcObject = mediaStream;
+	  <br>
       videoRef.current.play().catch(console.error);
+	  <br>
     }
+	<br>
   }, [webcamStream]); 
+  <br>
 
-
-- it will handle the video stream 
+- it will handle the video stream
+- <br>
 - above code triggers when someone turn on/off their camera this code block executes
-- if (videoRef.current && webcamStream) {   // this will check if video player on screen and camera stream both exists 
-- const mediaStream = new MediaStream(); // it will create the object or a empty container for storing the video 
-- and after storing video in container it connects to video player 
+- <br>
+- if (videoRef.current && webcamStream) {   // this will check if video player on screen and camera stream both exists
+- <br>
+- const mediaStream = new MediaStream(); // it will create the object or a empty container for storing the video
+- <br>
+- and after storing video in container it connects to video player
+- <br>
 - after pressing play button , video appears on screen , if something error happen it will handle by  .catch() method
+- <br>
 
 
 
  useEffect(() => {
+ <br>
     if (audioRef.current && micStream && !isLocal) {
+	<br>
       const mediaStream = new MediaStream();
+	  <br>
       mediaStream.addTrack(micStream.track);
+	  <br>
       audioRef.current.srcObject = mediaStream;
+	  <br>
       audioRef.current.play().catch(console.error);
+	  <br>
     }
+	<br>
   }, [micStream, isLocal]);
+  <br>
 
 
 -- this one is work similar as video code 
+<br>
 
 - when someone turn on/ off their mic this code run
-
-here we check 3 things together 
+<br>
+here we check 3 things together
+<br>
 I. Audio player means speaker exists
+<br>
 II. Microphone means whatever you speak through  microphone , that microphone exists
-III.  !isLocal- means this is not me , means don't play my voice back to me 
+<br>
+III.  !isLocal- means this is not me , means don't play my voice back to me
+<br>
 
-- here we create also one new container for storing , for taking audio and put  inside this container 
+- here we create also one new container for storing , for taking audio and put  inside this container
+- <br>
 
 - then we plug container into speakers
-
+<br>
 - press play button and hear their voice through speakers
-
+<br>
 
 
 UI part :
-
+<br>
 return (
+<br>
 	...
+	<br>
 	...
+	<br>
 	...
+	<br>
 )
+<br>
 
 
 - it will create the box to each user
-
-- and show person's name and if their's your name it will show you 
-
+- <br>
+- and show person's name and if their's your name it will show you
+- <br>
 - show the status of audio/camera
-
+<br>
 </h4>
 
 
 <h2>7. Controls() component </h2>
-
+<br>
 function Controls() {
-
+<br>
   const { leave, toggleMic, toggleWebcam, micOn, webcamOn } = useMeeting();
-  
+  <br>
   return (
+  <br>
     <div>
+		<br>
       <h3>Controls</h3>
+		<br>
       <button onClick={toggleMic}>
+		  <br>
         {micOn ? "Mute" : "Unmute"}
+		  <br>
       </button>
+		<br>
       <button onClick={toggleWebcam}>
+		  <br>
         {webcamOn ? "Stop Video" : "Start Video"}
+		  <br>
       </button>
+		<br>
       <button onClick={leave}>Leave Meeting</button>
+		<br>
     </div>
+	<br>
   );
 }
 
-
+<br>
 - here Controls() is the react UI component 
-
+<br>
 - it use useMeeting() hook which gives meeting actions and state 
-
+<br>
 - providing control functionality 
+<br>
 	- such as leave meeting , turn on/off mic and camera 
+	<br>
 	- give Boolean value of mic and camera is it currently on 
+	<br>
 	
 
 
 
-8. MeetingView() component 
+<h2>8. MeetingView() component </h2>
 -
-
+<br>
 // Component 4: Main Meeting Room
+<br>
 function MeetingView({ meetingId, onMeetingLeave }) {
+<br>
   const [joined, setJoined] = useState(false);
-  
+  <br>
   const { join, participants } = useMeeting({
+  <br>
     onMeetingJoined: () => {
+	<br>
       setJoined(true);
+	  <br>
       console.log("Meeting joined successfully");
+	  <br>
     },
+	<br>
     onMeetingLeft: () => {
+	<br>
       console.log("Meeting left");
+	  <br>
       onMeetingLeave();
+	  <br>
     },
+	<br>
     onError: (error) => {
+	<br>
       console.error("Meeting error:", error);
+	  <br>
       alert("Meeting error: " + error.message);
+	  <br>
     }
+	
   });
-
+<br>
   if (!joined) {
+  <br>
     return (
+	<br>
       <div>
+	  <br>
         <h3>Meeting ID: {meetingId}</h3>
+		<br>
         <button onClick={join}>Join Meeting</button>
+		<br>
       </div>
+	  
     );
   }
-
+<br>
   return (
+  <br>
     <div>
-      <h3>Meeting ID: {meetingId}</h3>
+      <p>Meeting ID: {meetingId}</p>
+	  <br>
       <Controls />
-      
+	  <br>
       <div>
         <h4>Participants ({participants.size})</h4>
+		<br>
         {[...participants.keys()].map((participantId) => (
+		<br>
           <ParticipantView
+			  <br>
             key={participantId}
+			<br>
             participantId={participantId}
+			<br>
           />
         ))}
       </div>
@@ -576,26 +667,25 @@ function MeetingView({ meetingId, onMeetingLeave }) {
   );
 }
 
-
+<br>
  - it use 2 props
+ <br>
 	1.  meeting ID  - unique id of current meeting 
+	<br>
 	2. meeting leave  - function to call when someone leave the meet 
-
-
+	<br>
 - useMeeting() -> it's hook which give access to meeting actions and  data 
-		join() -  function to join meeting 
-		participants() - collection of all the participants in the meeing 
-
-
-		- it also accept the event handlers( callbacks )
+<br>
+		join() -  function to join meeting <br>
+		participants() - collection of all the participants in the meeing <br>
+		- it also accept the event handlers( callbacks )<br>
 			- onMeetingJoin -> it run when you successfully join the meet 
-			- onMeetingLeft -> it run when you leave 
-			- onError -> it runs when there's any error 
-
-
+			<br>
+			- onMeetingLeft -> it run when you leave <br>
+			- onError -> it runs when there's any error <br>
+<br>
 - if you don't join the meet it will show the meeting id and button 
-
-
+<br>
 - once you joined it will show the controls , participant's 
 
 
